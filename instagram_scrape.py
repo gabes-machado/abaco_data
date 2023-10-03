@@ -82,6 +82,8 @@ def scrape(username, password, driver):
 
     data = overview_data | results_data | content_data | stories_data
 
+    driver.quit()
+
     return data
 
 username = str(input("Enter your username: "))
