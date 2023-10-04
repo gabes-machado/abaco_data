@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 import pandas as pd
+import os
 
 def driversetup():
     options = webdriver.ChromeOptions()
@@ -82,4 +83,9 @@ password = str(input("Enter your password: "))
 blog_data = scrape(username, password, driversetup())
 
 df = pd.DataFrame(blog_data, index=[0])
-df.to_csv('blog_data.csv', index=False)
+
+if not os.path.isfile('blog_data.csv'):
+    df.to_csv('blog_data.csv', index=False)
+else:
+    df = pd.read_csv('blog_data.csv')
+    df = df.append(blog_data, ignore_index=True)
