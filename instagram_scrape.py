@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
+import os
 import pandas as pd
 
 def driversetup():
@@ -43,7 +44,7 @@ def scrape(username, password, driver):
     time.sleep(5)
     driver.find_element(By.XPATH, '/html/body/div/div[1]/div/div[2]/div[1]/div/div[1]/div[2]/div/div/div/div[6]/div/button').click() # Find and click login with Instagram button
     time.sleep(5)
-    driver.find_element(By.XPATH, '//*[@id="facebook"]/body/div[1]/div[1]/div/div/div/div/div[2]/div/div/div[1]/div/div/div[2]/div/div[1]/nav/ul/div/div[7]/div/div/div/li/div/div/a').click() # Getting in the insights page
+    driver.find_element(By.XPATH, '/html/body/div[1]/div[1]/div/div/div/div/div[2]/div/div/div[1]/div/div/div[2]/div/div[1]/nav/ul/div/div[7]/div/div/li/div/div/a').click() # Getting in the insights page
     time.sleep(5)
     driver.find_element(By.XPATH, '//*[@id="facebook"]/body/div[4]/div[1]/div[1]/div/div/div/div/div[3]/div/div/div').click() # Closing pup-up window
     time.sleep(5)
@@ -92,4 +93,10 @@ password = str(input("Enter your password: "))
 instagram_data = scrape(username, password, driversetup())
 
 df = pd.DataFrame(instagram_data, index=[0])
-df.to_csv('instagram_data.csv', index=False)
+
+if not os.path.isfile('instagram_data.csv'):
+    df.to_csv('instagram_data.csv', index=False)
+else:
+    existing_df = pd.read_csv('instagram_data.csv')
+    updated_df = pd.concat([existing_df, df], ignore_index=True)
+    updated_df.to_csv('instagram_data.csv', index=False)

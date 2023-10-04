@@ -87,7 +87,7 @@ df = pd.DataFrame(blog_data, index=[0])
 if not os.path.isfile('blog_data.csv'):
     df.to_csv('blog_data.csv', index=False)
 else:
-    df = pd.read_csv('blog_data.csv')
-    df = df.append(blog_data, ignore_index=True)
-    df.write_csv('blog_data.csv')
+    existing_df = pd.read_csv('blog_data.csv')
+    updated_df = pd.concat([existing_df, df], ignore_index=True)
+    updated_df.to_csv('blog_data.csv', index=False)
     
