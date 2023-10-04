@@ -89,3 +89,5 @@ if not os.path.isfile('blog_data.csv'):
 else:
     df = pd.read_csv('blog_data.csv')
     df = df.append(blog_data, ignore_index=True)
+    df.write_csv('blog_data.csv')
+    
