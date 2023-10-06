@@ -37,7 +37,7 @@ XPATHS = {
 
 class InstaScraper:
     def __init__(self):
-        self.email = 'abacoconsultoriajr'
+        self.user = 'abacoconsultoriajr'
         self.password = 'Abacomaiorem5anos'
         self.driver = self._setup_driver()
     
@@ -61,7 +61,7 @@ class InstaScraper:
         try:
             self.driver.get('https://business.facebook.com/')  # Your initial login URL here
             self._wait_for_element(XPATHS['login_with_instagram']).click()
-            self._wait_for_element(XPATHS['username_input']).send_keys(self.email)
+            self._wait_for_element(XPATHS['username_input']).send_keys(self.user)
             self._wait_for_element(XPATHS['password_input']).send_keys(self.password)
             self._wait_for_element(XPATHS['login_button']).click()
             time.sleep(10)
@@ -81,7 +81,7 @@ class InstaScraper:
             followers = self._wait_for_element(XPATHS['followers']).text
 
             return {
-                'username': self.email,
+                'username': self.user,
                 'reach': reach,
                 'followers': followers
             }

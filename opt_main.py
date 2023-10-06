@@ -39,7 +39,7 @@ class Scraper:
         driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined});")
         return driver
     
-    def _wait_for_element(self, xpath, timeout=20):
+    def _wait_for_element(self, xpath, timeout=10):
         return WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((By.XPATH, xpath)))
 
     def _login(self):
@@ -48,13 +48,11 @@ class Scraper:
             email_field = self._wait_for_element(XPATHS['login_email'])
             email_field.click()
             email_field.send_keys(self.email)
-            login_button = self._wait_for_element(XPATHS['login_button'])
-            login_button.click()
+            self._wait_for_element(XPATHS['login_button']).click()
             password_field = self._wait_for_element(XPATHS['login_password'])
             password_field.click()
             password_field.send_keys(self.password)
-            login_button = self._wait_for_element(XPATHS['login_button'])
-            login_button.click()
+            self._wait_for_element(XPATHS['login_button']).click()
         except Exception as e:
             print(f"Error during login: {e}")
 
