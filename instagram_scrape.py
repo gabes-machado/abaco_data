@@ -150,13 +150,16 @@ class DataSaver:
     @staticmethod
     def save(data):
         df = pd.DataFrame(data, index=[0])
+        df.to_csv('insta_data.csv', index=False)        
+
+        '''
         if not os.path.isfile('insta_data.csv'):
             df.to_csv('insta_data.csv', index=False)
         else:
             existing_df = pd.read_csv('insta_data.csv')
             updated_df = pd.concat([existing_df, df], ignore_index=True)
             updated_df.to_csv('insta_data.csv', index=False)
-
+        '''
 
 scraper = InstaScraper()
 data = scraper.scrape_data()
