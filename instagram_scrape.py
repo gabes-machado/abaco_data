@@ -157,3 +157,7 @@ class DataSaver:
             updated_df = pd.concat([existing_df, df], ignore_index=True)
             updated_df.to_csv('insta_data.csv', index=False)
 
+
+scraper = InstaScraper()
+data = scraper.scrape_data()
+DataSaver.save(data)
