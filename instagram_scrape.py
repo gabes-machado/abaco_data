@@ -37,8 +37,8 @@ XPATHS = {
 
 class InstaScraper:
     def __init__(self):
-        self.user = 'abacoconsultoriajr'
-        self.password = 'Abacomaiorem5anos'
+        self.user = '' # input the user name
+        self.password = '' # input the password
         self.driver = self._setup_driver()
     
     def _setup_driver(self):
