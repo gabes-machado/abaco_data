@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -21,8 +22,9 @@ XPATHS = {
 
 class Scraper:
     def __init__(self):
-        self.email = 'aconsultoriacontabil@gmail.com'
-        self.password = 'maridiretora'
+        load_dotenv()
+        self.email = os.getenv('EMAIL')
+        self.password = os.getenv('PASSWORD')
         self.driver = self._setup_driver()
     
     def _setup_driver(self):
